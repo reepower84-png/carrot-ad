@@ -380,10 +380,7 @@ export default function Home() {
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
             <p className="mb-2">상호: 제이코리아 | 대표: 이주영</p>
             <p className="mb-4">사업자등록번호: 278-30-01540</p>
-            <p className="mb-4">© {new Date().getFullYear()} 당근마켓광고. All rights reserved.</p>
-            <p className="text-gray-500 text-xs">
-              사이트명: 당근마켓광고 | 제이코리아
-            </p>
+            <p>© {new Date().getFullYear()} 당근마켓광고. All rights reserved.</p>
           </div>
         </div>
       </footer>

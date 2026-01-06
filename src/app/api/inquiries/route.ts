@@ -1,28 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-interface Inquiry {
-  id: string;
-  name: string;
-  phone: string;
-  message: string;
-  createdAt: string;
-}
-
-const DATA_FILE = path.join(process.cwd(), "data", "inquiries.json");
-
-function getInquiries(): Inquiry[] {
-  try {
-    if (fs.existsSync(DATA_FILE)) {
-      const data = fs.readFileSync(DATA_FILE, "utf-8");
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.error("Error reading inquiries:", error);
-  }
-  return [];
-}
+import { supabase } from "@/lib/supabase";
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
@@ -35,9 +12,21 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const inquiries = getInquiries();
+  // Supabase에서 데이터 조회
+  const { data, error } = await supabase
+    .from("inquiries")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  return NextResponse.json({ inquiries });
+  if (error) {
+    console.error("Supabase error:", error);
+    return NextResponse.json(
+      { error: "데이터 조회 중 오류가 발생했습니다." },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json({ inquiries: data });
 }
 
 export async function DELETE(request: NextRequest) {
@@ -62,21 +51,19 @@ export async function DELETE(request: NextRequest) {
       );
     }
 
-    const inquiries = getInquiries();
-    const filteredInquiries = inquiries.filter((inq) => inq.id !== id);
+    // Supabase에서 데이터 삭제
+    const { error } = await supabase
+      .from("inquiries")
+      .delete()
+      .eq("id", id);
 
-    if (filteredInquiries.length === inquiries.length) {
+    if (error) {
+      console.error("Supabase error:", error);
       return NextResponse.json(
-        { error: "해당 문의를 찾을 수 없습니다." },
-        { status: 404 }
+        { error: "문의 삭제 중 오류가 발생했습니다." },
+        { status: 500 }
       );
     }
-
-    const dir = path.dirname(DATA_FILE);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(DATA_FILE, JSON.stringify(filteredInquiries, null, 2));
 
     return NextResponse.json({ message: "문의가 삭제되었습니다." });
   } catch (error) {

@@ -7,7 +7,7 @@ interface Inquiry {
   name: string;
   phone: string;
   message: string;
-  createdAt: string;
+  created_at: string;
 }
 
 export default function AdminPage() {
@@ -206,7 +206,7 @@ export default function AdminPage() {
                   {inquiries.map((inquiry) => (
                     <tr key={inquiry.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {new Date(inquiry.createdAt).toLocaleString("ko-KR", {
+                        {new Date(inquiry.created_at).toLocaleString("ko-KR", {
                           timeZone: "Asia/Seoul",
                         })}
                       </td>

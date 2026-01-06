@@ -1,35 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { supabase } from "@/lib/supabase";
 
-interface Inquiry {
-  id: string;
+interface InquiryInput {
   name: string;
   phone: string;
   message: string;
-  createdAt: string;
 }
 
-const DATA_FILE = path.join(process.cwd(), "data", "inquiries.json");
-
-function getInquiries(): Inquiry[] {
-  try {
-    if (fs.existsSync(DATA_FILE)) {
-      const data = fs.readFileSync(DATA_FILE, "utf-8");
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.error("Error reading inquiries:", error);
-  }
-  return [];
-}
-
-function saveInquiries(inquiries: Inquiry[]): void {
-  const dir = path.dirname(DATA_FILE);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  fs.writeFileSync(DATA_FILE, JSON.stringify(inquiries, null, 2));
+interface Inquiry extends InquiryInput {
+  id: string;
+  created_at: string;
 }
 
 async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
@@ -61,7 +41,7 @@ async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
       },
       {
         name: "접수 시간",
-        value: new Date(inquiry.createdAt).toLocaleString("ko-KR", {
+        value: new Date(inquiry.created_at).toLocaleString("ko-KR", {
           timeZone: "Asia/Seoul",
         }),
         inline: false,
@@ -70,7 +50,7 @@ async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
     footer: {
       text: "당근마켓광고 - 제이코리아",
     },
-    timestamp: inquiry.createdAt,
+    timestamp: inquiry.created_at,
   };
 
   try {
@@ -100,22 +80,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const inquiry: Inquiry = {
-      id: Date.now().toString(),
-      name,
-      phone,
-      message: message || "",
-      createdAt: new Date().toISOString(),
-    };
+    // Supabase에 데이터 저장
+    const { data, error } = await supabase
+      .from("inquiries")
+      .insert([
+        {
+          name,
+          phone,
+          message: message || "",
+        },
+      ])
+      .select()
+      .single();
 
-    const inquiries = getInquiries();
-    inquiries.unshift(inquiry);
-    saveInquiries(inquiries);
+    if (error) {
+      console.error("Supabase error:", error);
+      return NextResponse.json(
+        { error: "문의 저장 중 오류가 발생했습니다." },
+        { status: 500 }
+      );
+    }
 
-    await sendDiscordNotification(inquiry);
+    // Discord 알림 전송
+    await sendDiscordNotification(data as Inquiry);
 
     return NextResponse.json(
-      { message: "문의가 성공적으로 접수되었습니다.", id: inquiry.id },
+      { message: "문의가 성공적으로 접수되었습니다.", id: data.id },
       { status: 201 }
     );
   } catch (error) {

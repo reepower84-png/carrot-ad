@@ -7,8 +7,15 @@ interface Inquiry {
   name: string;
   phone: string;
   message: string;
+  status: string;
   created_at: string;
 }
+
+const STATUS_OPTIONS = [
+  { value: "대기중", label: "대기중", color: "bg-yellow-100 text-yellow-800" },
+  { value: "연락완료", label: "연락완료", color: "bg-blue-100 text-blue-800" },
+  { value: "상담완료", label: "상담완료", color: "bg-green-100 text-green-800" },
+];
 
 export default function AdminPage() {
   const [password, setPassword] = useState("");
@@ -83,6 +90,32 @@ export default function AdminPage() {
       }
     } catch (error) {
       console.error("Error deleting inquiry:", error);
+    }
+  };
+
+  const handleStatusChange = async (id: string, newStatus: string) => {
+    const storedPassword = sessionStorage.getItem("adminPassword");
+    if (!storedPassword) return;
+
+    try {
+      const response = await fetch("/api/inquiries", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${storedPassword}`,
+        },
+        body: JSON.stringify({ id, status: newStatus }),
+      });
+
+      if (response.ok) {
+        setInquiries(
+          inquiries.map((inq) =>
+            inq.id === id ? { ...inq, status: newStatus } : inq
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
     }
   };
 
@@ -198,6 +231,9 @@ export default function AdminPage() {
                       상담 문의
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      상태
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       관리
                     </th>
                   </tr>
@@ -223,6 +259,22 @@ export default function AdminPage() {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500 max-w-xs truncate">
                         {inquiry.message || "-"}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                        <select
+                          value={inquiry.status || "대기중"}
+                          onChange={(e) => handleStatusChange(inquiry.id, e.target.value)}
+                          className={`px-3 py-1 rounded-full text-xs font-medium border-0 cursor-pointer ${
+                            STATUS_OPTIONS.find((s) => s.value === (inquiry.status || "대기중"))?.color ||
+                            "bg-gray-100 text-gray-800"
+                          }`}
+                        >
+                          {STATUS_OPTIONS.map((option) => (
+                            <option key={option.value} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
+                        </select>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <button

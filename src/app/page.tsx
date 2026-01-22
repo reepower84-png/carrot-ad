@@ -485,7 +485,7 @@ export default function Home() {
               <div className="inline-block bg-[#ff6f0f] text-white text-sm font-bold px-4 py-1.5 rounded-full mb-6">
                 상품 1
               </div>
-              <h4 className="text-2xl font-bold text-gray-900 mb-6">비즈프로필</h4>
+              <h4 className="text-2xl font-bold text-gray-900 mb-6">비즈프로필 홍보</h4>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-start gap-3">

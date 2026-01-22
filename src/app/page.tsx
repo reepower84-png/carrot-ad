@@ -95,7 +95,7 @@ export default function Home() {
               className="hover:opacity-80 transition"
             >
               <Image
-                src="/ChatGPT_Image_2026년_1월_11일_오후_10_46_02_가로-removebg-preview.png"
+                src="/logo.png"
                 alt="동네광고연구소"
                 width={300}
                 height={80}
@@ -456,7 +456,7 @@ export default function Home() {
           </h3>
           <div className="mb-8 max-w-3xl mx-auto px-4">
             <Image
-              src="/ChatGPT Image 2026년 1월 8일 오전 11_43_55 3.jpg"
+              src="/certification.jpg"
               alt="전국 인증 이미지"
               width={800}
               height={600}
@@ -566,7 +566,7 @@ export default function Home() {
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110"
       >
         <Image
-          src="/카톡_원형_로고.png"
+          src="/kakao-logo.png"
           alt="카카오톡 상담"
           width={56}
           height={56}
@@ -579,7 +579,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
             <Image
-              src="/ChatGPT_Image_2026년_1월_11일_오후_10_46_02_가로-removebg-preview.png"
+              src="/logo.png"
               alt="동네광고연구소"
               width={400}
               height={100}

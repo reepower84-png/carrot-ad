@@ -473,19 +473,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h3 className="section-title">지금 바로 시작하세요</h3>
-          <p className="section-subtitle">
-            당근마켓 광고 전문가가 무료로 상담해드립니다
-          </p>
-          <button onClick={scrollToContact} className="btn-primary text-lg">
-            무료 상담 신청하기
-          </button>
-        </div>
-      </section>
-
       {/* Marketing Strategy Section */}
       <section id="strategy" className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
@@ -652,11 +639,24 @@ export default function Home() {
                 </div>
                 <div>
                   <p className="font-semibold text-gray-900">이**</p>
-                  <p className="text-sm text-gray-500">학원 원장</p>
+                  <p className="text-sm text-gray-500">가공식품 온·오프라인 판매 업체</p>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="section-title">지금 바로 시작하세요</h3>
+          <p className="section-subtitle">
+            당근마켓 광고 전문가가 무료로 상담해드립니다
+          </p>
+          <button onClick={scrollToContact} className="btn-primary text-lg">
+            무료 상담 신청하기
+          </button>
         </div>
       </section>
 

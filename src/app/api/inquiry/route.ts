@@ -48,7 +48,7 @@ async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
       },
     ],
     footer: {
-      text: "당근마켓광고 - 제이코리아",
+      text: "동네광고연구소 - 제이코리아",
     },
     timestamp: inquiry.created_at,
   };

@@ -141,7 +141,7 @@ export default function AdminPage() {
         <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">관리자 로그인</h1>
-            <p className="text-gray-600">당근마켓광고 어드민</p>
+            <p className="text-gray-600">동네광고연구소 어드민</p>
           </div>
 
           <form onSubmit={handleLogin}>
@@ -184,7 +184,7 @@ export default function AdminPage() {
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold text-[#ff6f0f]">당근마켓광고 관리자</h1>
+          <h1 className="text-xl font-bold text-[#ff6f0f]">동네광고연구소 관리자</h1>
           <button
             onClick={handleLogout}
             className="text-sm text-gray-600 hover:text-gray-900 transition"

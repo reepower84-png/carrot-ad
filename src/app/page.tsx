@@ -1,7 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+
+const navItems = [
+  { id: "hero", label: "홈" },
+  { id: "features", label: "광고 효과" },
+  { id: "advantages", label: "특장점" },
+  { id: "nationwide", label: "전국 노출" },
+  { id: "certification", label: "전국 인증" },
+  { id: "contact", label: "상담 문의" },
+];
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -11,9 +20,43 @@ export default function Home() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [activeSection, setActiveSection] = useState("hero");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    navItems.forEach(({ id }) => {
+      const element = document.getElementById(id);
+      if (element) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setActiveSection(id);
+              }
+            });
+          },
+          { threshold: 0.3, rootMargin: "-80px 0px -50% 0px" }
+        );
+        observer.observe(element);
+        observers.push(observer);
+      }
+    });
+
+    return () => {
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setIsMobileMenuOpen(false);
+  };
 
   const scrollToContact = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,33 +88,113 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-2 sm:px-4 py-3 sm:py-4 flex justify-between items-center">
-          <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="text-base sm:text-xl font-bold text-[#ff6f0f] hover:opacity-80 transition whitespace-nowrap"
+        <div className="max-w-6xl mx-auto px-2 sm:px-4 py-3 sm:py-4">
+          <div className="flex justify-between items-center">
+            <button
+              onClick={() => scrollToSection("hero")}
+              className="hover:opacity-80 transition"
             >
-              당근마켓광고
+              <Image
+                src="/ChatGPT_Image_2026년_1월_11일_오후_10_46_02_가로-removebg-preview.png"
+                alt="동네광고연구소"
+                width={300}
+                height={80}
+                className="h-12 sm:h-16 w-auto"
+              />
             </button>
-          <div className="flex items-center gap-1.5 sm:gap-3">
-            <a
-              href="https://drive.google.com/file/d/1UY6IySLTkQIyr-J46KyH-_1vZQIWZbqD/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition whitespace-nowrap"
-            >
-              <span className="hidden sm:inline">상품 상세보기</span>
-              <span className="sm:hidden">상세보기</span>
-            </a>
-            <button onClick={scrollToContact} className="btn-primary text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 whitespace-nowrap">
-              <span className="hidden sm:inline">무료 상담</span>
-              <span className="sm:hidden">상담</span>
-            </button>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    activeSection === item.id
+                      ? "text-[#ff6f0f] bg-[#fff5ef]"
+                      : "text-gray-600 hover:text-[#ff6f0f] hover:bg-gray-50"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-2">
+              <a
+                href="https://drive.google.com/file/d/1UY6IySLTkQIyr-J46KyH-_1vZQIWZbqD/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition whitespace-nowrap"
+              >
+                상품 상세보기
+              </a>
+              <button onClick={scrollToContact} className="hidden sm:inline-flex btn-primary text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 whitespace-nowrap">
+                무료 상담
+              </button>
+
+              {/* Mobile Hamburger Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+                aria-label="메뉴 열기"
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          <div
+            className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+              isMobileMenuOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+            }`}
+          >
+            <nav className="flex flex-col bg-gray-50 rounded-xl p-2">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`px-4 py-3 rounded-lg text-left font-medium transition-all ${
+                    activeSection === item.id
+                      ? "text-[#ff6f0f] bg-[#fff5ef]"
+                      : "text-gray-600 hover:text-[#ff6f0f] hover:bg-white"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <div className="flex gap-2 mt-2 pt-2 border-t border-gray-200">
+                <a
+                  href="https://drive.google.com/file/d/1UY6IySLTkQIyr-J46KyH-_1vZQIWZbqD/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 text-center text-sm py-2.5 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition"
+                >
+                  상품 상세보기
+                </a>
+                <button
+                  onClick={scrollToContact}
+                  className="flex-1 text-center text-sm py-2.5 bg-[#ff6f0f] text-white rounded-lg font-medium hover:bg-[#e5630d] transition"
+                >
+                  무료 상담
+                </button>
+              </div>
+            </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 bg-gradient-to-b from-[#fff5ef] to-white">
+      <section id="hero" className="pt-28 pb-20 px-4 bg-gradient-to-b from-[#fff5ef] to-white">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block bg-[#ff6f0f] text-white text-sm font-medium px-4 py-1 rounded-full mb-6">
             당근마켓 시행사
@@ -91,7 +214,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4">
+      <section id="features" className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h3 className="section-title">당근마켓 광고, 왜 효과적일까요?</h3>
           <p className="section-subtitle">지역 기반 광고의 새로운 패러다임</p>
@@ -163,7 +286,7 @@ export default function Home() {
       </section>
 
       {/* 당사 특장점 핵심 요약 Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <section id="advantages" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-5xl mx-auto">
           <h3 className="section-title">당사 특장점 핵심 요약</h3>
 
@@ -254,12 +377,94 @@ export default function Home() {
       </section>
 
       {/* Highlight Section */}
-      <section className="py-16 px-4 bg-gray-900">
+      <section id="nationwide" className="py-16 px-4 bg-gray-900 overflow-hidden">
         <div className="max-w-4xl mx-auto text-center">
+          {/* 전국 노출 시각화 */}
+          <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto mb-10">
+            {/* 퍼져나가는 파동 효과 */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute w-full h-full rounded-full border-2 border-[#ff6f0f]/20 animate-ping" style={{ animationDuration: '3s' }}></div>
+              <div className="absolute w-3/4 h-3/4 rounded-full border-2 border-[#ff6f0f]/30 animate-ping" style={{ animationDuration: '2.5s', animationDelay: '0.5s' }}></div>
+              <div className="absolute w-1/2 h-1/2 rounded-full border-2 border-[#ff6f0f]/40 animate-ping" style={{ animationDuration: '2s', animationDelay: '1s' }}></div>
+            </div>
+
+            {/* 중앙 당근 아이콘 */}
+            <div className="absolute inset-0 flex items-center justify-center z-10">
+              <div className="w-20 h-20 md:w-24 md:h-24 bg-[#ff6f0f] rounded-full flex items-center justify-center shadow-lg shadow-[#ff6f0f]/50">
+                <svg className="w-10 h-10 md:w-12 md:h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C13.1 2 14 2.9 14 4C14 4.74 13.6 5.39 13 5.73V7H14C15.1 7 16 7.9 16 9V10H17C18.1 10 19 10.9 19 12V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V12C5 10.9 5.9 10 7 10H8V9C8 7.9 8.9 7 10 7H11V5.73C10.4 5.39 10 4.74 10 4C10 2.9 10.9 2 12 2M7 12V19H17V12H7M12 14C13.1 14 14 14.9 14 16C14 17.1 13.1 18 12 18C10.9 18 10 17.1 10 16C10 14.9 10.9 14 12 14Z"/>
+                </svg>
+              </div>
+            </div>
+
+            {/* 전국 주요 도시 마커 */}
+            {/* 서울 */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 flex flex-col items-center animate-pulse">
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">서울</span>
+            </div>
+            {/* 부산 */}
+            <div className="absolute bottom-4 right-8 md:right-12 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.3s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">부산</span>
+            </div>
+            {/* 대구 */}
+            <div className="absolute bottom-16 right-4 md:right-6 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.6s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">대구</span>
+            </div>
+            {/* 인천 */}
+            <div className="absolute top-12 left-4 md:left-6 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.2s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">인천</span>
+            </div>
+            {/* 광주 */}
+            <div className="absolute bottom-8 left-8 md:left-12 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.5s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">광주</span>
+            </div>
+            {/* 대전 */}
+            <div className="absolute top-1/2 left-2 md:left-4 -translate-y-1/2 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.4s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">대전</span>
+            </div>
+            {/* 울산 */}
+            <div className="absolute top-1/3 right-2 md:right-4 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.7s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">울산</span>
+            </div>
+            {/* 제주 */}
+            <div className="absolute bottom-2 left-1/3 flex flex-col items-center animate-pulse" style={{ animationDelay: '0.8s' }}>
+              <div className="w-3 h-3 bg-[#ff6f0f] rounded-full shadow-lg shadow-[#ff6f0f]/50"></div>
+              <span className="text-xs text-white/80 mt-1 font-medium">제주</span>
+            </div>
+          </div>
+
           <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-relaxed">
             전국 어디든 원하는 지역에<br className="md:hidden" /> 원하는 양만큼<br />
-            노출이 가능한 건 오직!{" "}
+            동시 노출이 가능한 건 오직!{" "}
             <span className="text-[#ff6f0f]">당사뿐입니다!!</span>
+          </p>
+        </div>
+      </section>
+
+      {/* 전국 인증 섹션 */}
+      <section id="certification" className="py-20 px-4 bg-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            전국 인증을 통한 <span className="text-[#ff6f0f]">전국 통합 관리</span>
+          </h3>
+          <div className="mb-8 max-w-3xl mx-auto px-4">
+            <Image
+              src="/ChatGPT Image 2026년 1월 8일 오전 11_43_55 3.jpg"
+              alt="전국 인증 이미지"
+              width={800}
+              height={600}
+              className="rounded-2xl shadow-lg w-full h-auto"
+            />
+          </div>
+          <p className="text-2xl md:text-3xl font-bold text-gray-900">
+            자연스럽게 피드에 <span className="text-[#ff6f0f]">노출</span> 됩니다.
           </p>
         </div>
       </section>
@@ -373,14 +578,20 @@ export default function Home() {
       <footer className="bg-gray-900 text-white py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-8">
-            <h4 className="text-2xl font-bold text-[#ff6f0f] mb-2">당근마켓광고</h4>
+            <Image
+              src="/ChatGPT_Image_2026년_1월_11일_오후_10_46_02_가로-removebg-preview.png"
+              alt="동네광고연구소"
+              width={400}
+              height={100}
+              className="h-24 w-auto mx-auto mb-2"
+            />
             <p className="text-gray-400">당근마켓 시행사</p>
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
             <p className="mb-2">상호: 제이코리아 | 대표: 이주영</p>
             <p className="mb-4">사업자등록번호: 278-30-01540</p>
-            <p>© {new Date().getFullYear()} 당근마켓광고. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} 동네광고연구소. All rights reserved.</p>
           </div>
         </div>
       </footer>

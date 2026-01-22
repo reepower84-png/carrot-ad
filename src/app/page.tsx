@@ -467,6 +467,9 @@ export default function Home() {
           <p className="text-2xl md:text-3xl font-bold text-gray-900">
             자연스럽게 피드에 <span className="text-[#ff6f0f]">노출</span> 됩니다.
           </p>
+          <p className="text-lg md:text-xl text-gray-600 mt-4">
+            당사는 가계정, 불법 프로그램이 아닌 <span className="text-[#ff6f0f] font-semibold">100% 실 사용자 활성 아이디</span>로 진행되서 노출이 자연스럽습니다!!
+          </p>
         </div>
       </section>
 

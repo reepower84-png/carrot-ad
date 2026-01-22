@@ -21,6 +21,11 @@
   scroll-behavior: smooth;
 }
 
+/* 섹션 이동 시 헤더에 가려지지 않도록 오프셋 추가 */
+section[id] {
+  scroll-margin-top: 100px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

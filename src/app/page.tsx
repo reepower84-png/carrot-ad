@@ -9,6 +9,7 @@ const navItems = [
   { id: "advantages", label: "특장점" },
   { id: "nationwide", label: "전국 노출" },
   { id: "certification", label: "전국 인증" },
+  { id: "strategy", label: "마케팅전략" },
   { id: "contact", label: "상담 문의" },
 ];
 
@@ -479,6 +480,101 @@ export default function Home() {
           <button onClick={scrollToContact} className="btn-primary text-lg">
             무료 상담 신청하기
           </button>
+        </div>
+      </section>
+
+      {/* Marketing Strategy Section */}
+      <section id="strategy" className="py-20 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="section-title">마케팅 전략</h3>
+          <p className="section-subtitle">당근마켓 광고 상품 안내</p>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* 상품1 - 비즈프로필 */}
+            <div className="bg-gradient-to-br from-[#fff5ef] to-white p-8 rounded-2xl shadow-lg border border-[#ff6f0f]/20">
+              <div className="inline-block bg-[#ff6f0f] text-white text-sm font-bold px-4 py-1.5 rounded-full mb-6">
+                상품 1
+              </div>
+              <h4 className="text-2xl font-bold text-gray-900 mb-6">비즈프로필</h4>
+
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-20 h-7 bg-[#ff6f0f] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    STEP 01
+                  </span>
+                  <p className="text-gray-700 pt-0.5">비즈프로필 등록 및 키워드 최적화</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-20 h-7 bg-[#ff6f0f] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    STEP 02
+                  </span>
+                  <p className="text-gray-700 pt-0.5">동네생활 게시글 작업진행 (질문형 + 후기형 혼합)</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-20 h-7 bg-[#ff6f0f] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    STEP 03
+                  </span>
+                  <p className="text-gray-700 pt-0.5">비즈프로필 후기 업로드로 신뢰 강화</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-20 h-7 bg-[#ff6f0f] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    STEP 04
+                  </span>
+                  <p className="text-gray-700 pt-0.5">성과 분석 및 주기적 키워드 보완</p>
+                </div>
+              </div>
+
+              <div className="bg-white/80 p-5 rounded-xl border border-[#ff6f0f]/10">
+                <div className="flex items-center gap-2 mb-3">
+                  <svg className="w-5 h-5 text-[#ff6f0f]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-bold text-gray-900">효과</span>
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  업종 검색 시 자동노출 · 검색 노출 강화 · 브랜드 인지도 향상 · 단골 확보 · 광고비 절감
+                </p>
+              </div>
+            </div>
+
+            {/* 상품2 - 동네생활 게시글 홍보 */}
+            <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg border border-gray-200">
+              <div className="inline-block bg-gray-800 text-white text-sm font-bold px-4 py-1.5 rounded-full mb-6">
+                상품 2
+              </div>
+              <h4 className="text-2xl font-bold text-gray-900 mb-6">동네생활 게시글 홍보</h4>
+
+              <div className="mb-8">
+                <div className="flex flex-wrap gap-3 mb-6">
+                  <span className="px-4 py-2 bg-[#fff5ef] text-[#ff6f0f] font-semibold rounded-lg border border-[#ff6f0f]/20">
+                    정보형
+                  </span>
+                  <span className="px-4 py-2 bg-[#fff5ef] text-[#ff6f0f] font-semibold rounded-lg border border-[#ff6f0f]/20">
+                    후기형
+                  </span>
+                  <span className="px-4 py-2 bg-[#fff5ef] text-[#ff6f0f] font-semibold rounded-lg border border-[#ff6f0f]/20">
+                    질문형
+                  </span>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  게시글 및 답글을 활용한 <span className="text-[#ff6f0f] font-semibold">자연스러운 노출</span><br />
+                  누구나 질문과 답변 참여 가능
+                </p>
+              </div>
+
+              <div className="bg-gray-100/80 p-5 rounded-xl">
+                <div className="flex items-center gap-2 mb-3">
+                  <svg className="w-5 h-5 text-[#ff6f0f]" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-bold text-gray-900">효과</span>
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  신뢰 기반 콘텐츠 형성 · 검색 노출 효과가 매우 큼 · 누적형 자산 콘텐츠 · 타겟 고객 직접 접근 가능
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -581,6 +581,85 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Customer Reviews Section */}
+      <section className="py-20 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h3 className="section-title">고객 후기</h3>
+          <p className="section-subtitle">실제 광고주분들의 생생한 후기입니다</p>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* 후기 1 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;동네 카페 운영 중인데 당근 광고 시작하고 단골이 확실히 늘었어요. 특히 동네 주민들이 검색해서 찾아오시는 분들이 많아졌습니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">김</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">김**</p>
+                  <p className="text-sm text-gray-500">카페 운영</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 2 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;네이버 광고비가 너무 비싸서 고민이었는데, 당근 광고는 가성비가 정말 좋아요. 전환율도 높고 문의도 꾸준히 들어옵니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">박</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">박**</p>
+                  <p className="text-sm text-gray-500">인테리어 업체</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 3 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;처음엔 반신반의했는데 결과가 너무 좋아서 놀랐습니다. 전국 여러 지역에 동시 노출되니까 확실히 효과가 다르네요!&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">이</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">이**</p>
+                  <p className="text-sm text-gray-500">학원 원장</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
       <section id="contact" className="py-20 px-4">
         <div className="max-w-2xl mx-auto">

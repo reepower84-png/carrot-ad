@@ -121,16 +121,16 @@ export default function Home() {
               ))}
             </nav>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <a
                 href="https://drive.google.com/file/d/1cogj34q2sXbAdAeTEc-1jjKA5aOLpDB0/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden sm:inline-flex text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition whitespace-nowrap"
+                className="inline-flex text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition whitespace-nowrap"
               >
                 상품 상세보기
               </a>
-              <button onClick={scrollToContact} className="hidden sm:inline-flex btn-primary text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 whitespace-nowrap">
+              <button onClick={scrollToContact} className="inline-flex btn-primary text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 whitespace-nowrap">
                 무료 상담
               </button>
 
@@ -160,22 +160,6 @@ export default function Home() {
             }`}
           >
             <nav className="flex flex-col bg-gray-50 rounded-xl p-2">
-              <div className="flex gap-2 mb-2 pb-2 border-b border-gray-200">
-                <a
-                  href="https://drive.google.com/file/d/1cogj34q2sXbAdAeTEc-1jjKA5aOLpDB0/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 text-center text-sm py-2.5 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition"
-                >
-                  상품 상세보기
-                </a>
-                <button
-                  onClick={scrollToContact}
-                  className="flex-1 text-center text-sm py-2.5 bg-[#ff6f0f] text-white rounded-lg font-medium hover:bg-[#e5630d] transition"
-                >
-                  무료 상담
-                </button>
-              </div>
               {navItems.map((item) => (
                 <button
                   key={item.id}

@@ -160,20 +160,7 @@ export default function Home() {
             }`}
           >
             <nav className="flex flex-col bg-gray-50 rounded-xl p-2">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`px-4 py-3 rounded-lg text-left font-medium transition-all ${
-                    activeSection === item.id
-                      ? "text-[#ff6f0f] bg-[#fff5ef]"
-                      : "text-gray-600 hover:text-[#ff6f0f] hover:bg-white"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-              <div className="flex gap-2 mt-2 pt-2 border-t border-gray-200">
+              <div className="flex gap-2 mb-2 pb-2 border-b border-gray-200">
                 <a
                   href="https://drive.google.com/file/d/1cogj34q2sXbAdAeTEc-1jjKA5aOLpDB0/view?usp=sharing"
                   target="_blank"
@@ -189,6 +176,19 @@ export default function Home() {
                   무료 상담
                 </button>
               </div>
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`px-4 py-3 rounded-lg text-left font-medium transition-all ${
+                    activeSection === item.id
+                      ? "text-[#ff6f0f] bg-[#fff5ef]"
+                      : "text-gray-600 hover:text-[#ff6f0f] hover:bg-white"
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
             </nav>
           </div>
         </div>

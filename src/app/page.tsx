@@ -123,7 +123,7 @@ export default function Home() {
 
             <div className="flex items-center gap-2">
               <a
-                href="https://drive.google.com/file/d/1UY6IySLTkQIyr-J46KyH-_1vZQIWZbqD/view?usp=sharing"
+                href="https://drive.google.com/file/d/1cogj34q2sXbAdAeTEc-1jjKA5aOLpDB0/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden sm:inline-flex text-xs sm:text-sm py-1.5 sm:py-2 px-2 sm:px-4 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition whitespace-nowrap"
@@ -175,7 +175,7 @@ export default function Home() {
               ))}
               <div className="flex gap-2 mt-2 pt-2 border-t border-gray-200">
                 <a
-                  href="https://drive.google.com/file/d/1UY6IySLTkQIyr-J46KyH-_1vZQIWZbqD/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1cogj34q2sXbAdAeTEc-1jjKA5aOLpDB0/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 text-center text-sm py-2.5 border-2 border-[#ff6f0f] text-[#ff6f0f] rounded-lg font-medium hover:bg-[#fff5ef] transition"

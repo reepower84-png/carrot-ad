@@ -859,7 +859,8 @@ export default function Home() {
               href="https://pf.kakao.com/_uSEYb/chat"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full btn-primary block text-center"
+              className="w-full mt-3 block text-center px-6 py-3 rounded-full font-semibold text-gray-900 transition-all duration-300 hover:brightness-95"
+              style={{ backgroundColor: "#FEE500" }}
             >
               카카오톡으로 상담하기
             </a>

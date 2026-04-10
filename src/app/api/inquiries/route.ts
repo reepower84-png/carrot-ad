@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export async function GET(request: NextRequest) {
   const authHeader = request.headers.get("authorization");
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
   }
 
   // Supabase에서 데이터 조회
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from("inquiries")
     .select("*")
     .order("created_at", { ascending: false });
@@ -51,10 +51,11 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const { error } = await supabase
+    const { data: updatedData, error } = await supabaseAdmin
       .from("inquiries")
       .update({ status })
-      .eq("id", id);
+      .eq("id", id)
+      .select();
 
     if (error) {
       console.error("Supabase error:", error);
@@ -64,7 +65,14 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({ message: "상태가 업데이트되었습니다." });
+    if (!updatedData || updatedData.length === 0) {
+      return NextResponse.json(
+        { error: "해당 문의를 찾을 수 없거나 업데이트 권한이 없습니다." },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ message: "상태가 업데이트되었습니다.", inquiry: updatedData[0] });
   } catch (error) {
     console.error("Error updating status:", error);
     return NextResponse.json(
@@ -97,7 +105,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Supabase에서 데이터 삭제
-    const { error } = await supabase
+    const { error } = await supabaseAdmin
       .from("inquiries")
       .delete()
       .eq("id", id);

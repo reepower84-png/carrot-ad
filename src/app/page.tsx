@@ -10,6 +10,7 @@ const navItems = [
   { id: "nationwide", label: "전국 노출" },
   { id: "certification", label: "전국 인증" },
   { id: "strategy", label: "마케팅전략" },
+  { id: "reviews", label: "고객 후기" },
   { id: "contact", label: "상담 문의" },
 ];
 
@@ -553,7 +554,7 @@ export default function Home() {
       </section>
 
       {/* Customer Reviews Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section id="reviews" className="py-20 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h3 className="section-title">고객 후기</h3>
           <p className="section-subtitle">실제 광고주분들의 생생한 후기입니다</p>
@@ -624,6 +625,144 @@ export default function Home() {
                 <div>
                   <p className="font-semibold text-gray-900">이**</p>
                   <p className="text-sm text-gray-500">가공식품 온·오프라인 판매 업체</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 4 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;미용실 오픈하고 당근 광고로 초기 고객을 확보했어요. 동네 분들이 광고 보고 예약하시는 경우가 정말 많습니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">최</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">최**</p>
+                  <p className="text-sm text-gray-500">미용실 운영</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 5 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;학원 광고를 여러 곳에서 해봤는데 당근이 가장 효율적이었어요. 학부모님들이 동네에서 바로 검색하시니까 전환이 빠릅니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">정</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">정**</p>
+                  <p className="text-sm text-gray-500">영어학원 원장</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 6 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;부동산 매물 홍보에 당근 광고를 활용하고 있는데, 지역 타겟팅이 정확해서 실제 관심 있는 분들만 문의가 옵니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">한</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">한**</p>
+                  <p className="text-sm text-gray-500">공인중개사</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 7 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;세탁소를 운영하는데 당근 광고 덕분에 신규 고객이 2배 이상 늘었어요. 한 번 오신 분들이 단골이 되시니 효과가 지속됩니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">송</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">송**</p>
+                  <p className="text-sm text-gray-500">세탁소 운영</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 8 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;필라테스 스튜디오 오픈 초기에 당근 광고를 시작했는데, 한 달 만에 회원 30명을 모집했어요. 지역 광고의 힘을 실감했습니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">윤</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">윤**</p>
+                  <p className="text-sm text-gray-500">필라테스 스튜디오 운영</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 후기 9 */}
+            <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
+              <div className="flex items-center gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="text-gray-700 mb-4 leading-relaxed">
+                &ldquo;음식점 배달 말고 매장 방문 고객을 늘리고 싶었는데, 당근 광고가 딱이었어요. 근처 주민들이 직접 찾아와 주시니 배달 수수료도 아끼고 일석이조입니다.&rdquo;
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#fff5ef] rounded-full flex items-center justify-center">
+                  <span className="text-[#ff6f0f] font-bold">장</span>
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-900">장**</p>
+                  <p className="text-sm text-gray-500">한식당 운영</p>
                 </div>
               </div>
             </div>
@@ -716,6 +855,14 @@ export default function Home() {
             >
               {isSubmitting ? "접수 중..." : "상담 신청하기"}
             </button>
+            <a
+              href="https://pf.kakao.com/_uSEYb/chat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full btn-primary block text-center"
+            >
+              카카오톡으로 상담하기
+            </a>
           </form>
         </div>
       </section>

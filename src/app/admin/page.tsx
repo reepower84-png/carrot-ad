@@ -108,14 +108,22 @@ export default function AdminPage() {
       });
 
       if (response.ok) {
-        setInquiries(
-          inquiries.map((inq) =>
-            inq.id === id ? { ...inq, status: newStatus } : inq
-          )
-        );
+        const data = await response.json();
+        if (data.inquiry) {
+          setInquiries(
+            inquiries.map((inq) =>
+              inq.id === id ? { ...inq, status: data.inquiry.status } : inq
+            )
+          );
+        }
+      } else {
+        alert("상태 변경에 실패했습니다. 다시 시도해주세요.");
+        fetchInquiries();
       }
     } catch (error) {
       console.error("Error updating status:", error);
+      alert("상태 변경 중 오류가 발생했습니다.");
+      fetchInquiries();
     }
   };
 

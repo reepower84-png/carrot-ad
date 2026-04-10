@@ -1,24 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
 
-interface InquiryInput {
+async function sendDiscordNotification(data: {
   name: string;
   phone: string;
   message: string;
-}
-
-interface Inquiry extends InquiryInput {
-  id: string;
-  created_at: string;
-}
-
-async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
+}): Promise<void> {
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
   if (!webhookUrl) {
-    console.error("Discord webhook URL not configured");
-    return;
+    throw new Error("Discord webhook URL not configured");
   }
+
+  const now = new Date().toISOString();
 
   const embed = {
     title: "새로운 상담 문의가 접수되었습니다!",
@@ -26,22 +19,22 @@ async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
     fields: [
       {
         name: "이름",
-        value: inquiry.name,
+        value: data.name,
         inline: true,
       },
       {
         name: "전화번호",
-        value: inquiry.phone,
+        value: data.phone,
         inline: true,
       },
       {
         name: "상담 문의",
-        value: inquiry.message || "(내용 없음)",
+        value: data.message || "(내용 없음)",
         inline: false,
       },
       {
         name: "접수 시간",
-        value: new Date(inquiry.created_at).toLocaleString("ko-KR", {
+        value: new Date(now).toLocaleString("ko-KR", {
           timeZone: "Asia/Seoul",
         }),
         inline: false,
@@ -50,21 +43,21 @@ async function sendDiscordNotification(inquiry: Inquiry): Promise<void> {
     footer: {
       text: "동네광고연구소 - 제이코리아",
     },
-    timestamp: inquiry.created_at,
+    timestamp: now,
   };
 
-  try {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        embeds: [embed],
-      }),
-    });
-  } catch (error) {
-    console.error("Error sending Discord notification:", error);
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      embeds: [embed],
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Discord webhook failed: ${response.status}`);
   }
 }
 
@@ -80,32 +73,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Supabase에 데이터 저장
-    const { data, error } = await supabase
-      .from("inquiries")
-      .insert([
-        {
-          name,
-          phone,
-          message: message || "",
-        },
-      ])
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Supabase error:", error);
-      return NextResponse.json(
-        { error: "문의 저장 중 오류가 발생했습니다." },
-        { status: 500 }
-      );
-    }
-
-    // Discord 알림 전송
-    await sendDiscordNotification(data as Inquiry);
+    // Discord로 직접 알림 전송
+    await sendDiscordNotification({ name, phone, message: message || "" });
 
     return NextResponse.json(
-      { message: "문의가 성공적으로 접수되었습니다.", id: data.id },
+      { message: "문의가 성공적으로 접수되었습니다." },
       { status: 201 }
     );
   } catch (error) {

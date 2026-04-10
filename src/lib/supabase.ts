@@ -5,6 +5,10 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+// 서버 API 전용 (RLS 우회)
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
+
 export interface Inquiry {
   id: string;
   name: string;

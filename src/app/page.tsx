@@ -899,7 +899,8 @@ export default function Home() {
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
             <p className="mb-2">상호: 제이코리아 | 대표: 이주영</p>
-            <p className="mb-4">사업자등록번호: 278-30-01540</p>
+            <p className="mb-2">사업자등록번호: 278-30-01540</p>
+            <p className="mb-4">주소: 서울특별시 강남구 도곡로84길 6, B1층 25-68호</p>
             <p>© {new Date().getFullYear()} 동네광고연구소. All rights reserved.</p>
           </div>
         </div>
